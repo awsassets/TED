@@ -6,13 +6,13 @@ Si tenéis twitter y estáis en el mundo de la ciberseguridad, sabréis que es m
 
 El bot ataca a varios endpoints de la API de twitter, uno de ellos por ejemplo es donde se estrimean los tweets y se realiza un filtro que veremos más adelante, para empezar veremos como se realizan las peticiones, y es que para hacer dichas consultas es necesario tener una cuenta de desarrollador de Twitter y para conseguirla es necesario enviar un email mencionando los intereses en utilizar la API.
 
-<p align="center"><img src="1.png" height="500" width="825" /></p>
-<p align="center"><img src="2.png" height="500" width="825" /></p>
-<p align="center"><img src="3.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/1.PNG" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/2.PNG" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/3.PNG" height="500" width="825" /></p>
 
 Una vez aprobada por el equipo de Twitter, en el panel de desarrollador: https://developer.twitter.com/en/portal/dashboard, saldrá el proyecto que nos han creado, en este caso para propósitos academicos se habilitará el acceso a la V1.1 y a la V2 de la API.
 
-<p align="center"><img src="4.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/4.PNG" height="500" width="825" /></p>
 
 > Desde el mismo panel es donde se generan los tokens (API Key & Secret y el Bearer Token) que utilizaremos para nuestro código en Python.
 
@@ -35,7 +35,7 @@ twint -s "CVE-" --since 2015-12-20
 
 Una vez descargados, viene la parte tediosa la cual es identificar que tweet es una PoC/Exploit y cual no, un proceso manual que se basa en abrir el .csv e ir linea por linea marcando 1 o 0 en función si vemos que se trata de un exploit o no, esto es necesario para el algoritmo de clasificación que vamos a utilizar ya que al ser supervisado tenemos que clasificar nosotros el dataset poniendo etiquetas (labels), en este caso la etiqueta 'exploit' que será igual a 1 o 0.
 
-<p align="center"><img src="5.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/5.PNG" height="500" width="825" /></p>
 
 Para esta aplicación se clasificaron muy pocos tweets, en total fueron 629, aplicación entrenanda siguiendo el modelo MultinomialNB, un tipo de algoritmo del conjunto Naive Bayes, una clase especial de algoritmos de clasificación de Machine Learning que se basan en una técnica de clasificación estadística llamada “teorema de Bayes”, como mencioné anteriormente supervisado.
 
@@ -147,19 +147,19 @@ Para la documentación sobre el stream y las reglas podemos consultar los siguie
 - Rules: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule
 
 
-<p align="center"><img src="6.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/6.PNG" height="500" width="825" /></p>
 
 
 Llegados hasta aqui solo nos queda una pregunta por responder, ¿es funcional?
 
 Pues si, el bot es funcional, veamos un caso que ha considerado como exploit:
 
-<p align="center"><img src="7.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/7.PNG" height="500" width="825" /></p>
 
 Efectivamente es un exploit para la vulnerabilidad CVE-2020-25078 que afecta a las camaras D_Link-DCS-2530L, una vulnerabilidad vieja pero ejemplifica bien el funcionamiento del bot, si nos vamos a shodan.io y buscamos por ese modelo de camara nos aparecerán 4275 resultados, si entramos en una IP del listado y añadimos a la url "/config/getuser?index=0" veremos que en muchos casos es posible explotarlos, consiguiendo de esta manera las credenciales de la cuenta administrador que nos permiten entrar en la camara y ver en tiempo real el video capturado.
 
-<p align="center"><img src="8.png" height="500" width="825" /></p>
-<p align="center"><img src="9.png" height="500" width="825" /></p>
-<p align="center"><img src="10.png" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/8.PNG" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/9.PNG" height="500" width="825" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexfrancow/TED/main/images/10.PNG" height="500" width="825" /></p>
 
 El bot categoriza algunos tweets que no son exploits, esto es debido a que solo ofrece un 0.77 de Acc, cosa que se podrá mejorar etiquetando más tweets del dataset y entrenando de nuevo el modelo.
